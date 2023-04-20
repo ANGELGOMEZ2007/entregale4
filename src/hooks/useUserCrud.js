@@ -1,0 +1,47 @@
+import axios from "axios"
+import { useState } from "react"
+
+const useUserCrud = () => {
+
+    const [users, setUsers] = useState()
+
+    const url = 'https://users-crud.academlo.tech/users/'
+
+    //get
+    const getAllUsers = () => {
+        axios.get(url)
+            .then(res => setUsers(res.data))
+            .catch(err => console.log(err))
+    }
+
+    //post
+    const createNewUser = () => {
+        axios.post(url, data)
+            .then(res => getAllUsers())
+            .catch(err => console.log(err))
+    }
+    //Delete
+    const deleteUserById = id => {
+        const urlDelete = `${url}${id}/`
+        axios.delete(urlDelete)
+        .then(res => getAllUsers())
+        .catch(err => console.log(err))
+    }
+    //update
+    const updateUserById = (id,data) => {
+        const urlUpdate = `${url}${id}/`
+        axios.patch(urlUpdate, data)
+        .then(res => getAllUsers())
+        .catch(err => console.log(err))
+    }
+
+    return {
+        users,
+        getAllUsers,
+        createNewUser,
+        deleteUserById,
+        updateUserById
+    }
+}
+
+export default useUserCrud
