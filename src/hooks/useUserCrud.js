@@ -15,7 +15,7 @@ const useUserCrud = () => {
     }
 
     //post
-    const createNewUser = () => {
+    const createNewUser = data => {
         axios.post(url, data)
             .then(res => getAllUsers())
             .catch(err => console.log(err))
